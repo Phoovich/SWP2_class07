@@ -36,3 +36,7 @@ export default function venuePage({ params }: { params: { vid: string } }) {
     </main>
   );
 }
+
+export async function generateStaticParams() {
+  return [{ vid: "001" }, { vid: "002" }, { vid: "003" }];
+}

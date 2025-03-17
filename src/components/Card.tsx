@@ -27,7 +27,6 @@ export default function ProductCard({
       <div data-testid={`${venueName} Rating`}>
         <Rating
           onClick={(e) => {
-            e.preventDefault();
             e.stopPropagation();
           }}
           onChange={(e, newValue) => {
