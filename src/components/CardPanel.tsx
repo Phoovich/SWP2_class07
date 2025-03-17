@@ -1,6 +1,7 @@
 "use client";
 import { useReducer } from "react";
 import Card from "./Card";
+import Link from "next/link";
 
 export default function CardPanel() {
   const cardReducer = (
@@ -34,6 +35,15 @@ export default function CardPanel() {
     dispatchCompare({ type: "update", venueName, rating });
   };
 
+  /**
+   * Mock Data
+   */
+  const mockVenueRepo = [
+    { vid: "001", name: "The Bloom Pavilion", image: "/img/bloom.jpg" },
+    { vid: "002", name: "Spark Space", image: "/img/sparkspace.jpg" },
+    { vid: "003", name: "The Grand Table", image: "/img/grandtable.jpg" },
+  ];
+
   return (
     <div>
       <div
@@ -44,26 +54,20 @@ export default function CardPanel() {
           flexWrap: "wrap",
           justifyContent: "space-around",
           alignContent: "space-around",
+          padding: "10px",
         }}
       >
-        <Card
-          venueName="The Bloom Pavilion"
-          imgSrc="/img/bloom.jpg"
-          onCompare={handleRatingChange}
-          rating={compareList.get("The Bloom Pavilion") || 0}
-        />
-        <Card
-          venueName="Spark Space"
-          imgSrc="/img/sparkspace.jpg"
-          onCompare={handleRatingChange}
-          rating={compareList.get("Spark Space") || 0}
-        />
-        <Card
-          venueName="The Grand Table"
-          imgSrc="/img/grandtable.jpg"
-          onCompare={handleRatingChange}
-          rating={compareList.get("The Grand Table") || 0}
-        />
+        {mockVenueRepo.map((venue) => (
+          <Link href={`/venue/${venue.vid}`} className="w-1/5">
+            <Card
+              key={venue.vid}
+              venueName={venue.name}
+              imgSrc={venue.image}
+              onCompare={handleRatingChange}
+              rating={compareList.get(venue.name) || 0}
+            />
+          </Link>
+        ))}
       </div>
       <div className="w-full text-xl font-medium">
         Venue List With Ratings ({compareList.size})
@@ -81,3 +85,10 @@ export default function CardPanel() {
     </div>
   );
 }
+
+// <Card
+//   venueName="The Grand Table"
+//   imgSrc="/img/grandtable.jpg"
+//   onCompare={handleRatingChange}
+//   rating={compareList.get("The Grand Table") || 0}
+// />

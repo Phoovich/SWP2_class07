@@ -26,7 +26,10 @@ export default function ProductCard({
       <div className="w-full h-[15%] p-[10px]">{venueName}</div>
       <div data-testid={`${venueName} Rating`}>
         <Rating
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
           onChange={(e, newValue) => {
             e?.stopPropagation();
             onCompare(venueName, newValue || 0);
