@@ -9,7 +9,7 @@ export default function Banner() {
   const cover = [
     "/img/cover.jpg",
     "/img/cover2.jpg",
-    "/img/cover3.webp",
+    "/img/cover3.jpg",
     "/img/cover4.jpg",
   ];
   const [index, setIndex] = useState(0);
